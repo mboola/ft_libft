@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:23:05 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/20 13:27:34 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/20 13:29:49 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	ft_toupper(int c)
 {
-	if (ft_isalpha(c))
-	{
-		if (c <= 'a')
-			return (c - 32);
-		else
-			return (c + 32);
-	}
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
 	return (c);
 }
