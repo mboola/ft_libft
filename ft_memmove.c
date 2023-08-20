@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:14:47 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/20 13:21:18 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/20 13:43:14 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	*memmove(void *dest, const void *src, size_t n)
 			count--;
 			*(ptr_dest + count) = *(unsigned char *)(src + count);
 		}
-		*(ptr_dest + count) = *(unsigned char *)(src + count);
 	}
 	else
 	{
