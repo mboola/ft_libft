@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/22 19:29:11 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:16:52 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,6 +281,104 @@ void	test_ft_memmove(void)
 	printf("ft_memmove total errors: %d\n", err);
 }
 
+void	test_ft_toupper(void)
+{
+	int	err;
+	int	tmp;
+
+	err = 0;
+	tmp = 0;
+	while (tmp < 256)
+	{
+		//printf("Value '%d' ft_toupper: '%d' toupper: '%d'\n", tmp, ft_toupper(tmp), toupper(tmp));
+		if (ft_toupper(tmp) != toupper(tmp))
+			err++;
+		tmp++;
+	}
+	printf("ft_toupper total errors: %d\n", err);
+}
+
+void	test_ft_tolower(void)
+{
+	int	err;
+	int	tmp;
+
+	err = 0;
+	tmp = 0;
+	while (tmp < 256)
+	{
+		//printf("Value '%d' ft_tolower: '%d' tolower: '%d'\n", tmp, ft_tolower(tmp), tolower(tmp));
+		if (ft_tolower(tmp) != tolower(tmp))
+			err++;
+		tmp++;
+	}
+	printf("ft_tolower total errors: %d\n", err);
+}
+
+void	test_ft_strchr(void)
+{
+	int	err;
+	char	*str;
+	char	s[] = "abc123321cba";
+	char	s2[] = "";
+
+	err = 0;
+	str = &s[0];
+	if (ft_strchr(str, 'a') != strchr(str, 'a'))
+		err++;
+	if (ft_strchr(str, '4') != strchr(str, '4'))
+		err++;
+	str = &s2[0];
+	if (ft_strchr(str, '\0') != strchr(str, '\0'))
+		err++;
+	printf("ft_strchr total errors: %d\n", err);
+}
+
+void	test_ft_strrchr(void)
+{
+	int	err;
+	char	*str;
+	char	s[] = "abc123321cba";
+	char	s2[] = "";
+
+	err = 0;
+	str = &s[0];
+	if (ft_strrchr(str, 'a') != strrchr(str, 'a'))
+		err++;
+	if (ft_strrchr(str, '4') != strrchr(str, '4'))
+		err++;
+	str = &s2[0];
+	if (ft_strrchr(str, '\0') != strrchr(str, '\0'))
+		err++;
+	printf("ft_strrchr total errors: %d\n", err);
+}
+
+void	test_ft_strncmp(void)
+{
+	int	err;
+	char	*str;
+	char	*str2;
+	char	s[] = "abc123";
+	char	s1[] = "abc412";
+	char	s2[] = "";
+
+	err = 0;
+	str = &s[0];
+	str2 = &s1[0];
+	if (ft_strncmp(str, str2, 0) != strncmp(str, str2, 0))
+		err++;
+	if (ft_strncmp(str, str2, 3) != strncmp(str, str2, 3))
+		err++;
+	if (ft_strncmp(str, str2, 5) != strncmp(str, str2, 5))
+		err++;
+	str = &s2[0];
+	if (ft_strncmp(str, str2, 0) != strncmp(str, str2, 0))
+		err++;
+	if (ft_strncmp(str, str2, 3) != strncmp(str, str2, 3))
+		err++;
+	printf("ft_strncmp total errors: %d\n", err);
+}
+
 int	main(void)
 {
 	srand(time(NULL));
@@ -294,5 +392,11 @@ int	main(void)
 	test_ft_bzero();
 	test_ft_memcpy();
 	test_ft_memmove();
+	
+	test_ft_toupper();
+	test_ft_tolower();
+	test_ft_strchr();
+	test_ft_strrchr();
+	test_ft_strncmp();
 	return (0);
 }
