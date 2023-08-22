@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:13:39 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/19 12:31:54 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:29:48 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	mem_overlap(const void *s1, const void *s2, size_t n)
 	return (0);
 }
 
-void	*memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t				count;
 	unsigned char		*ptr_dest;

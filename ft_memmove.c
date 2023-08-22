@@ -6,13 +6,13 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:14:47 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/20 13:43:14 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:30:37 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t				count;
 	unsigned char		*ptr_dest;
