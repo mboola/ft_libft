@@ -6,34 +6,39 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/22 13:00:00 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:29:11 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
+#include <strings.h>
+#include <ctype.h>
+#include <time.h>
+
+int	generate_rand_number(int min, int max)
+{
+	int range;
+	int random;
+
+	range = max - min + 1;
+	random = rand() % range;
+	return (random + min);
+}
 
 void	test_ft_isalpha(void)
 {
 	int	err;
 	int	tmp;
-	int	result;
 
 	err = 0;
 	tmp = -127;
 	while (tmp < 127)
 	{
-		result = ft_isalpha(tmp);
-		if ((tmp >= 'a' && tmp <= 'z') || (tmp >= 'A' && tmp <= 'Z'))
-		{
-			if (result != 1)
-				err++;
-		}
-		else
-		{
-			if (result != 0)
-				err++;
-		}
+		//printf("Value '%d' ft_isalpha: '%d' isalpha: '%d'\n", tmp, ft_isalpha(tmp), isalpha(tmp));
+		if ((ft_isalpha(tmp) == 0 && isalpha(tmp) != 0) || ft_isalpha(tmp) != 0 && isalpha(tmp) == 0)
+			err++;
 		tmp++;
 	}
 	printf("ft_isalpha total errors: %d\n", err);
@@ -43,23 +48,14 @@ void	test_ft_isdigit(void)
 {
 	int	err;
 	int	tmp;
-	int	result;
 
 	err = 0;
 	tmp = -127;
 	while (tmp < 256)
 	{
-		result = ft_isdigit(tmp);
-		if (tmp >= '0' && tmp <= '9')
-		{
-			if (result != 1)
-				err++;
-		}
-		else
-		{
-			if (result != 0)
-				err++;
-		}
+		//printf("Value '%d' ft_isdigit: '%d' isdigit: '%d'\n", tmp, ft_isdigit(tmp), isdigit(tmp));
+		if ((ft_isdigit(tmp) == 0 && isdigit(tmp) != 0) || (ft_isdigit(tmp) != 0 && isdigit(tmp) == 0))
+			err++;
 		tmp++;
 	}
 	printf("ft_isdigit total errors: %d\n", err);
@@ -69,50 +65,31 @@ void	test_ft_isalnum(void)
 {
 	int	err;
 	int	tmp;
-	int	result;
 
 	err = 0;
 	tmp = -127;
 	while (tmp < 256)
 	{
-		result = ft_isalnum(tmp);
-		if ((tmp >= 'a' && tmp <= 'z') || (tmp >= 'A' && tmp <= 'Z') || (tmp >= '0' && tmp <= '9'))
-		{
-			if (result != 1)
-				err++;
-		}
-		else
-		{
-			if (result != 0)
-				err++;
-		}
+		//printf("Value '%d' ft_isalnum: '%d' isalnum: '%d'\n", tmp, ft_isalnum(tmp), isalnum(tmp));
+		if ((ft_isalnum(tmp) == 0 && isalnum(tmp) != 0) || (ft_isalnum(tmp) != 0 && isalnum(tmp) == 0))
+			err++;
 		tmp++;
 	}
 	printf("ft_isalnum total errors: %d\n", err);
-
 }
 
 void	test_ft_isascii(void)
 {
 	int	err;
 	int	tmp;
-	int	result;
 
 	err = 0;
 	tmp = -127;
 	while (tmp < 256)
 	{
-		result = ft_isascii(tmp);
-		if (tmp >= 0 && tmp <= 255)
-		{
-			if (result != 1)
-				err++;
-		}
-		else
-		{
-			if (result != 0)
-				err++;
-		}
+		//printf("Value '%d' ft_isascii: '%d' isascii: '%d'\n", tmp, ft_isascii(tmp), isascii(tmp));
+		if ((ft_isascii(tmp) == 0 && isascii(tmp) != 0) || (ft_isascii(tmp) != 0 && isascii(tmp) == 0))
+			err++;
 		tmp++;
 	}
 	printf("ft_isascii total errors: %d\n", err);
@@ -123,23 +100,14 @@ void	test_ft_isprint(void)
 {
 	int	err;
 	int	tmp;
-	int	result;
 
 	err = 0;
 	tmp = -127;
 	while (tmp < 256)
 	{
-		result = ft_isprint(tmp);
-		if (tmp >= 32 && tmp <= 126)
-		{
-			if (result != 1)
-				err++;
-		}
-		else
-		{
-			if (result != 0)
-				err++;
-		}
+		//intf("Value '%d' ft_isprint: '%d' isprint: '%d'\n", tmp, ft_isprint(tmp), isprint(tmp));
+		if ((ft_isprint(tmp) == 0 && isprint(tmp) != 0) || (ft_isprint(tmp) != 0 && ft_isprint(tmp) == 0))
+			err++;
 		tmp++;
 	}
 	printf("ft_isprint total errors: %d\n", err);
@@ -151,29 +119,13 @@ void	test_ft_strlen(void)
 	size_t	result;
 
 	err = 0;
-	if (ft_strlen("") != 0)
+	if (ft_strlen("") != strlen(""))
 		err++;
-	if (ft_strlen("a") != 1)
+	if (ft_strlen("a") != strlen("a"))
 		err++;
-	if (ft_strlen("0123456789") != 10)
+	if (ft_strlen("0123456789\n") != strlen("0123456789\n"))
 		err++;
 	printf("ft_strlen total errors: %d\n", err);
-}
-
-int	aux_memcmp(void *s1, void *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (*(char *)s1 != *(char *)s2)
-			return (0);
-		s1++;
-		s2++;
-		i++;
-	}
-	return (1);
 }
 
 void	aux_memprint(void *s, size_t n)
@@ -187,31 +139,38 @@ void	aux_memprint(void *s, size_t n)
 		s++;
 		i++;
 	}
-	printf("	");
+	printf("\n");
 }
 
 void	test_ft_memset(void)
 {
 	int	err;
-	int	ptr_int[8];
-	char	ptr_char[10];
-	void	*ptr_void;
+	int	ptr_int1[10];
+	int	ptr_int2[10];
+	char	ptr_char1[60];
+	char	ptr_char2[40];
+	char	*ptr_char3;
+	char	*ptr_char4;
+	void	*ptr_void1;
+	void	*ptr_void2;
 
 	err = 0;
-	ptr_void = ft_memset(ptr_int, 'a', 8);
-	if (!aux_memcmp(ptr_void, "aaaaaaaa", 8))
+	ptr_void1 = ft_memset(ptr_int1, 'a', 8);
+	ptr_void2 = memset(ptr_int2, 'a', 8);
+	if (memcmp(ptr_void1, ptr_void2, 8))
 		err++;
-	//aux_memprint(ptr_void, 8);
-	ptr_void = ft_memset(ptr_char, 'b', 4);
-	if (!aux_memcmp(ptr_void, "bbbb", 4))
+
+	ptr_void1 = ft_memset(ptr_char1, 'b', 10);
+	ptr_void2 = memset(ptr_char2, 'b', 10);
+	if (memcmp(ptr_void1, ptr_void2, 10))
 		err++;
-	//aux_memprint(ptr_void, 4);
-	ptr_void = ft_memset(ptr_char, 97, 10);
-	if (!aux_memcmp(ptr_void, "aaaaaaaaaa", 10))
-		err++;
-	//aux_memprint(ptr_void, 10);
-	ptr_void = ft_memset(ptr_int, '1', 1);
-	if (!aux_memcmp(ptr_void, "1", 1))
+
+	bzero(ptr_char1, 60);
+	ptr_char3 = &ptr_char1[10];
+	ptr_void1 = ft_memset(ptr_char3, '1', 10);
+	ptr_char4 = &ptr_char1[40];
+	ptr_void2 = memset(ptr_char4, '1', 10);
+	if (memcmp(ptr_void1 - 10, ptr_void2 - 10, 30))
 		err++;
 	printf("ft_memset total errors: %d\n", err);
 }
@@ -219,15 +178,18 @@ void	test_ft_memset(void)
 void	test_ft_bzero(void)
 {
 	int	err;
-	int	ptr_int[100];
-	void	*ptr_void;
+	char	ptr[100];
+	void	*ptr_void1;
+	void	*ptr_void2;
+	void	*ptr_void3;
 
 	err = 0;
-	ptr_void = ft_memset(ptr_int, 'a', 4);
-	//aux_memprint(ptr_void, 4);
-	ft_bzero(ptr_void, 8);
-	//aux_memprint(ptr_void, 8);
-	if (!aux_memcmp(ptr_void, "\0\0\0\0\0\0\0\0", 8))
+	ptr_void1 = memset(ptr, 'c', 100);
+	ptr_void2 = ptr_void1 + 10;
+	ft_bzero(ptr_void2, 10);
+	ptr_void3 = ptr_void2 + 30;
+	bzero(ptr_void3, 10);
+	if (memcmp(ptr_void1, ptr_void3 - 10, 30))
 		err++;
 	printf("ft_bzero total errors: %d\n", err);
 }
@@ -235,24 +197,79 @@ void	test_ft_bzero(void)
 void	test_ft_memcpy(void)
 {
 	int	err;
-	char	ptr[100];
-	char	ptr_char[100];
-	void	*ptr_test2;
-	void	*ptr_test;
-	void	*ptr_void;
+	int	num;
+	int	x;
+	char	ptr[1000];
+	void	*ptr_void1;
+	void	*ptr_void2;
+	void	*ptr_void3;
+	void	*ptr_void4;
 
 	err = 0;
-	ft_bzero(ptr, 100);
-	ft_bzero(ptr_char, 100);
-	ptr_void = &ptr[2];
-	ptr_test = ft_memset(ptr, 'a', 8);
-	//aux_memprint(ptr_test, 10);
-	ptr_test2 = ft_memset(ptr_char, 'b', 8);
-	//aux_memprint(ptr_test2, 10);
-	ptr_void = ft_memcpy(ptr_void, ptr_test2, 8);
-	if (!aux_memcmp(ptr_void, "bbbbbbbb", 8))
+	bzero(ptr, 1000);
+	ptr_void1 = &ptr[10];
+	ptr_void1 = memset(ptr_void1, 'a', 10);
+	ptr_void2 = &ptr[40];
+	ptr_void3 = ft_memcpy(ptr_void2, ptr_void1, 10);
+	if (memcmp(ptr_void1 - 10, ptr_void2 - 10, 30))
 		err++;
-	//aux_memprint(ptr_test, 20);
+	if (memcmp(ptr_void3, ptr_void2, 10))
+		err++;
+
+	bzero(ptr, 1000);
+	ptr_void1 = &ptr[10];
+	ptr_void1 = memset(ptr_void1, 'a', 30);
+	ptr_void2 = &ptr[60];
+	ptr_void2 = memset(ptr_void2, 'b', 30);
+	ptr_void1 += 10;
+	ptr_void1 = memset(ptr_void1, 'c', 10);
+	ptr_void2 += 10;
+	ptr_void2 = memset(ptr_void2, 'c', 10);
+	ptr_void3 = &ptr[100];
+	ptr_void4 = &ptr[0];
+	ptr_void4 = memcpy(ptr_void3, ptr_void4, 50);
+	ptr_void3 = ft_memcpy(ptr_void1, ptr_void2, 10);
+	if (memcmp(ptr_void4, ptr_void3 - 20, 50))
+		err++;
+
+	bzero(ptr, 1000);
+	ptr_void1 = &ptr[0];
+	num = 0;
+	while (num < 60)
+	{
+		x = generate_rand_number(32, 80);
+		ptr_void2 = memset(ptr_void1, x, 1);
+		ptr_void1++;
+		num++;
+	}
+	ptr_void1 = &ptr[0];
+	ptr_void2 = &ptr[100];
+	ptr_void2 = memcpy(ptr_void2, ptr_void1, 60);
+	ptr_void4 = memcpy(ptr_void2 + 10, ptr_void2 + 20, 30);
+	ptr_void3 = ft_memcpy(ptr_void1 + 10, ptr_void1 + 20, 30);
+	if (memcmp(ptr_void1, ptr_void2, 60))
+		err++;
+
+	bzero(ptr, 1000);
+	ptr_void1 = &ptr[0];
+	num = 0;
+	while (num < 60)
+	{
+		x = generate_rand_number(32, 80);
+		ptr_void2 = memset(ptr_void1, x, 1);
+		ptr_void1++;
+		num++;
+	}
+	ptr_void1 = &ptr[0];
+	ptr_void2 = &ptr[100];
+	ptr_void2 = memcpy(ptr_void2, ptr_void1, 60);
+	ptr_void4 = memcpy(ptr_void2 + 20, ptr_void2 + 10, 30);
+	ptr_void3 = ft_memcpy(ptr_void1 + 20, ptr_void1 + 10, 30);
+	if (memcmp(ptr_void4, ptr_void3, 30))
+		err++;
+	if (memcmp(ptr_void1, ptr_void2, 60))
+		err++;
+
 	printf("ft_memcpy total errors: %d\n", err);
 }
 
@@ -266,6 +283,7 @@ void	test_ft_memmove(void)
 
 int	main(void)
 {
+	srand(time(NULL));
 	test_ft_isalpha();
 	test_ft_isdigit();
 	test_ft_isalnum();
