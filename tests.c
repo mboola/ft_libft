@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/22 20:16:52 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:25:17 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@
 #include <strings.h>
 #include <ctype.h>
 #include <time.h>
+
+char	*strnstr(const char *s, const char *find, size_t slen)
+{
+	char c, sc;
+	size_t len;
+
+	if ((c = *find++) != '\0') {
+		len = strlen(find);
+		do {
+			do {
+				if (slen-- < 1 || (sc = *s++) == '\0')
+					return (NULL);
+			} while (sc != c);
+			if (len > slen)
+				return (NULL);
+		} while (strncmp(s, find, len) != 0);
+		s--;
+	}
+	return ((char *)s);
+}
 
 int	generate_rand_number(int min, int max)
 {
@@ -281,6 +301,22 @@ void	test_ft_memmove(void)
 	printf("ft_memmove total errors: %d\n", err);
 }
 
+void	test_ft_strlcpy(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_strlcpy total errors: %d\n", err);
+}
+
+void	test_ft_strlcat(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_strlcat total errors: %d\n", err);
+}
+
 void	test_ft_toupper(void)
 {
 	int	err;
@@ -379,24 +415,165 @@ void	test_ft_strncmp(void)
 	printf("ft_strncmp total errors: %d\n", err);
 }
 
+void	test_ft_memchr(void)
+{
+	int	err;
+	int	len;
+	void	*ptr;
+	char	s[] = "abc123321cba";
+	char	s2[] = "\0";
+	char	s3[] = "1\0";
+	len = strlen(s);
+	err = 0;
+	ptr = &s[0];
+	if (ft_memchr(ptr, 'a', len) != memchr(ptr, 'a', len))
+		err++;
+	if (ft_memchr(ptr, '4', len) != memchr(ptr, '4', len))
+		err++;
+	ptr = &s2[0];
+	len = strlen(s2);
+	if (ft_memchr(ptr, '\0', len) != memchr(ptr, '\0', len))
+		err++;
+	if (ft_memchr(ptr, '\0', 1) != memchr(ptr, '\0', 1))
+		err++;
+	ptr = &s3[0];
+	len = strlen(s3);
+	if (ft_memchr(ptr, '\0', len) != memchr(ptr, '\0', len))
+		err++;
+	if (ft_memchr(ptr, '\0', 2) != memchr(ptr, '\0', 2))
+		err++;
+	
+	printf("ft_memchr total errors: %d\n", err);
+}
+
+void	test_ft_memcmp(void)
+{
+	int	err;
+	void	*ptr1;
+	void	*ptr2;
+	char	s1[] = "abc123";
+	char	s2[] = "abc412";
+	char	s3[] = "";
+
+	err = 0;
+	ptr1 = &s1[0];
+	ptr2 = &s2[0];
+	if (ft_memcmp(ptr1, ptr2, 0) != memcmp(ptr1, ptr2, 0))
+		err++;
+	if (ft_memcmp(ptr1, ptr2, 3) != memcmp(ptr1, ptr2, 3))
+		err++;
+	if (ft_memcmp(ptr1, ptr2, 5) != memcmp(ptr1, ptr2, 5))
+		err++;
+	ptr1 = &s3[0];
+	if (ft_memcmp(ptr1, ptr2, 0) != memcmp(ptr1, ptr2, 0))
+		err++;
+	if (ft_memcmp(ptr1, ptr2, 3) != memcmp(ptr1, ptr2, 3))
+		err++;
+	printf("ft_memcmp total errors: %d\n", err);
+}
+
+void	test_ft_strnstr(void)
+{
+	int	err;
+	char	easy_haystack[] = "abc";
+	char	easy_needle[] = "ab";
+	char	medium_haystack[] = "acabbcabbbcc";
+	char	medium_needle1[] = "abb";
+	char	medium_needle2[] = "bcc";
+	char	hard_haystack[] = "aabaabbacaabbaabbaabcaabbaabc";
+	char	hard_needle[] = "aabbaabc";
+
+	err = 0;
+	if (ft_strnstr(easy_haystack, easy_needle, 3) != strnstr(easy_haystack, easy_needle, 3))
+		err++;
+	if (ft_strnstr(easy_haystack, easy_needle, 1) != strnstr(easy_haystack, easy_needle, 1))
+		err++;
+	if (ft_strnstr(medium_haystack, medium_needle1, strlen(medium_haystack)) != strnstr(medium_haystack, medium_needle1, strlen(medium_haystack)))
+		err++;
+	if (ft_strnstr(medium_haystack, medium_needle1, 4) != strnstr(medium_haystack, medium_needle1, 4))
+		err++;
+	if (ft_strnstr(medium_haystack, medium_needle2, strlen(medium_haystack)) != strnstr(medium_haystack, medium_needle2, strlen(medium_haystack)))
+		err++;
+	if (ft_strnstr(medium_haystack, medium_needle2, strlen(medium_haystack) - 1) != strnstr(medium_haystack, medium_needle2, strlen(medium_haystack) - 1))
+		err++;
+	if (ft_strnstr(hard_haystack, hard_needle, strlen(hard_haystack)) != strnstr(hard_haystack, hard_needle, strlen(hard_haystack)))
+		err++;
+	if (ft_strnstr(hard_haystack, hard_needle, 20) != strnstr(hard_haystack, hard_needle, 20))
+		err++;
+	printf("ft_strnstr total errors: %d\n", err);
+}
+
+void	test_ft_atoi(void)
+{
+	int	err;
+
+	err = 0;
+	if (ft_atoi("") != atoi(""))
+		err++;
+	if (ft_atoi("1") != atoi("1"))
+		err++;
+	if (ft_atoi("-1") != atoi("-1"))
+		err++;
+	if (ft_atoi("0") != atoi("0"))
+		err++;
+	if (ft_atoi("2147483647") != atoi("2147483647"))
+		err++;
+	if (ft_atoi("00000002147483647") != atoi("00000002147483647"))
+		err++;
+	if (ft_atoi("-2147483648") != atoi("-2147483648"))
+		err++;
+	if (ft_atoi("-00002147483648") != atoi("-00002147483648"))
+		err++;
+	if (ft_atoi("\n\t -123") != atoi("\n\t -123"))
+		err++;
+	if (ft_atoi(" +123") != atoi(" +123"))
+		err++;
+	if (ft_atoi("-+123") != atoi("-+123"))
+		err++;
+	printf("ft_atoi total errors: %d\n", err);
+}
+
+void	test_ft_calloc(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_calloc total errors: %d\n", err);
+}
+
+void	test_ft_strdup(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_strdup total errors: %d\n", err);
+}
+
 int	main(void)
 {
 	srand(time(NULL));
-	test_ft_isalpha();
-	test_ft_isdigit();
-	test_ft_isalnum();
-	test_ft_isascii();
-	test_ft_isprint();
-	test_ft_strlen();
-	test_ft_memset();
-	test_ft_bzero();
-	test_ft_memcpy();
+	test_ft_isalpha();	//done
+	test_ft_isdigit();	//done
+	test_ft_isalnum();	//done
+	test_ft_isascii();	//done
+	test_ft_isprint();	//done
+	test_ft_strlen();	//done
+	test_ft_memset();	//done
+	test_ft_bzero();	//done
+	test_ft_memcpy();	//done
 	test_ft_memmove();
-	
-	test_ft_toupper();
-	test_ft_tolower();
-	test_ft_strchr();
-	test_ft_strrchr();
-	test_ft_strncmp();
+	test_ft_strlcpy();
+	test_ft_strlcat();
+	test_ft_toupper();	//done
+	test_ft_tolower();	//done
+	test_ft_strchr();	//done
+	test_ft_strrchr();	//done
+	test_ft_strncmp();	//done
+	test_ft_memchr();	//done
+	test_ft_memcmp();	//done
+	test_ft_strnstr();	
+	test_ft_atoi();		//done
+	test_ft_calloc();	
+	test_ft_strdup();
 	return (0);
 }
