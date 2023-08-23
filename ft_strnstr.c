@@ -6,22 +6,23 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 14:51:10 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/20 14:55:40 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:54:40 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	search_needle_in_haystack(const char *haystack, const char *needle)
+static int	searchin_big(const char *big, const char *lit, size_t i, size_t len)
 {
-	while (*needle != '\0' && *haystack != '\0')
+	while (*lit != '\0' && *big != '\0' && i < len)
 	{
-		if (*needle != *haystack)
+		if (*lit != *big)
 			return (0);
-		needle++;
-		haystack++;
+		lit++;
+		i++;
+		big++;
 	}
-	if (*needle == '\0')
+	if (*lit == '\0')
 		return (1);
 	return (-1);
 }
@@ -38,7 +39,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	{
 		if (*big == *little)
 		{
-			result = search_needle_in_haystack(big, little);
+			result = searchin_big(big, little, count, len);
 			if (result == 1)
 				return ((char *)big);
 			if (result == -1)

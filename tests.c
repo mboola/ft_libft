@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/23 13:25:17 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:59:52 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -475,6 +475,8 @@ void	test_ft_memcmp(void)
 void	test_ft_strnstr(void)
 {
 	int	err;
+	char	empty_haystack[] = "\0";
+	char	empty_needle[] = "\0";
 	char	easy_haystack[] = "abc";
 	char	easy_needle[] = "ab";
 	char	medium_haystack[] = "acabbcabbbcc";
@@ -484,6 +486,12 @@ void	test_ft_strnstr(void)
 	char	hard_needle[] = "aabbaabc";
 
 	err = 0;
+	if (ft_strnstr(empty_haystack, empty_needle, strlen(empty_haystack)) != strnstr(empty_haystack, empty_needle, strlen(empty_haystack)))
+		err++;
+	if (ft_strnstr(empty_haystack, easy_needle, strlen(empty_haystack)) != strnstr(empty_haystack, easy_needle, strlen(empty_haystack)))
+		err++;
+	if (ft_strnstr(easy_haystack, empty_needle, strlen(easy_haystack)) != strnstr(easy_haystack, empty_needle, strlen(easy_haystack)))
+		err++;
 	if (ft_strnstr(easy_haystack, easy_needle, 3) != strnstr(easy_haystack, easy_needle, 3))
 		err++;
 	if (ft_strnstr(easy_haystack, easy_needle, 1) != strnstr(easy_haystack, easy_needle, 1))
@@ -571,7 +579,7 @@ int	main(void)
 	test_ft_strncmp();	//done
 	test_ft_memchr();	//done
 	test_ft_memcmp();	//done
-	test_ft_strnstr();	
+	test_ft_strnstr();	//done
 	test_ft_atoi();		//done
 	test_ft_calloc();	
 	test_ft_strdup();
