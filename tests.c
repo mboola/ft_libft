@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/23 13:59:52 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/24 02:07:36 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -557,31 +557,143 @@ void	test_ft_strdup(void)
 	printf("ft_strdup total errors: %d\n", err);
 }
 
+void	test_ft_substr(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_substr total errors: %d\n", err);
+}
+
+void	test_ft_strjoin(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_strjoin total errors: %d\n", err);
+}
+
+void	test_ft_strtrim(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_strtrim total errors: %d\n", err);
+}
+
+void	test_ft_split(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_split total errors: %d\n", err);
+}
+
+void	test_ft_itoa(void)
+{
+	int	err;
+	int	num;
+
+	err = 0;
+//	printf("%s\n", ft_itoa(0));
+	if (strncmp(ft_itoa(0), "0", 2))
+		err++;
+//	printf("%s\n", ft_itoa(-1));
+	if (strncmp(ft_itoa(-1), "-1", 3))
+		err++;
+//	printf("%s\n", ft_itoa(2147483647));
+	if (strncmp(ft_itoa(2147483647), "2147483647", 11))
+		err++;
+//	printf("%s\n", ft_itoa(-2147483648));
+	if (strncmp(ft_itoa(-2147483648), "-2147483648", 12))
+		err++;
+	printf("ft_itoa total errors: %d\n", err);
+}
+
+void	test_ft_strmapi(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_strmapi total errors: %d\n", err);
+}
+
+void	test_ft_striteri(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_striteri total errors: %d\n", err);
+}
+
+void	test_ft_putchar_fd(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_putchar_fd total errors: %d\n", err);
+}
+
+void	test_ft_putstr_fd(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_putstr_fd total errors: %d\n", err);
+}
+
+void	test_ft_putendl_fd(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_putendl_fd total errors: %d\n", err);
+}
+
+void	test_ft_putnbr_fd(void)
+{
+	int	err;
+
+	err = 0;
+	printf("ft_putnbr_fd total errors: %d\n", err);
+}
+
 int	main(void)
 {
 	srand(time(NULL));
-	test_ft_isalpha();	//done
-	test_ft_isdigit();	//done
-	test_ft_isalnum();	//done
-	test_ft_isascii();	//done
-	test_ft_isprint();	//done
-	test_ft_strlen();	//done
-	test_ft_memset();	//done
-	test_ft_bzero();	//done
-	test_ft_memcpy();	//done
-	test_ft_memmove();
-	test_ft_strlcpy();
-	test_ft_strlcat();
-	test_ft_toupper();	//done
-	test_ft_tolower();	//done
-	test_ft_strchr();	//done
-	test_ft_strrchr();	//done
-	test_ft_strncmp();	//done
-	test_ft_memchr();	//done
-	test_ft_memcmp();	//done
-	test_ft_strnstr();	//done
-	test_ft_atoi();		//done
-	test_ft_calloc();	
-	test_ft_strdup();
+	test_ft_isalpha();	//done && tested
+	test_ft_isdigit();	//done && tested
+	test_ft_isalnum();	//done && tested
+	test_ft_isascii();	//done && tested
+	test_ft_isprint();	//done && tested
+	test_ft_strlen();	//done && tested
+	test_ft_memset();	//done && tested
+	test_ft_bzero();	//done && tested
+	test_ft_memcpy();	//done && tested
+	test_ft_memmove();	//done
+	test_ft_strlcpy();	//done
+	test_ft_strlcat();	//done
+	test_ft_toupper();	//done && tested
+	test_ft_tolower();	//done && tested
+	test_ft_strchr();	//done && tested
+	test_ft_strrchr();	//done && tested
+	test_ft_strncmp();	//done && tested
+	test_ft_memchr();	//done && tested
+	test_ft_memcmp();	//done && tested
+	test_ft_strnstr();	//done && tested
+	test_ft_atoi();		//done && tested
+	test_ft_calloc();	//done
+	test_ft_strdup();	//done
+	test_ft_substr();	//done
+	test_ft_strjoin();	//done
+	test_ft_strtrim();
+	test_ft_split();	//done
+	test_ft_itoa();		//done && tested
+	test_ft_strmapi();
+	test_ft_striteri();
+	test_ft_putchar_fd();
+	test_ft_putstr_fd();
+	test_ft_putendl_fd();
+	test_ft_putnbr_fd();
 	return (0);
 }
