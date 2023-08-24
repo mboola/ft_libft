@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/24 02:07:36 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:09:06 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -562,6 +562,20 @@ void	test_ft_substr(void)
 	int	err;
 
 	err = 0;
+	if (strncmp(ft_substr("test1", 2, 1), "s", 2))
+		err++;
+	if (strncmp(ft_substr("test2", 2, 3), "st2", 4))
+		err++;
+	if (ft_substr("1", 3, 1) != NULL)
+		err++;
+	if (strncmp(ft_substr("0123", 0, 4), "0123", 5))
+		err++;
+	if (strncmp(ft_substr("0123", 3, 1), "3", 2))
+		err++;
+	if (strncmp(ft_substr("0123", 3, 2), "3\0\0", 3))
+		err++;
+	if (strncmp(ft_substr("01", 1, 100), "1", 100))
+		err++;
 	printf("ft_substr total errors: %d\n", err);
 }
 
