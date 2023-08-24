@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/24 13:09:06 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:23:49 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -584,6 +584,22 @@ void	test_ft_strjoin(void)
 	int	err;
 
 	err = 0;
+	if (strncmp(ft_strjoin("a", "b"), "ab", 3))
+		err++;
+	if (strncmp(ft_strjoin("ab", ""), "ab", 3))
+		err++;
+	if (strncmp(ft_strjoin("", "ab"), "ab", 3))
+		err++;
+	if (strncmp(ft_strjoin("", ""), "", 1))
+		err++;
+	if (strncmp(ft_strjoin("1234", "4321"), "12344321", 9))
+		err++;
+	if (strncmp(ft_strjoin("1234", ""), "1234", 5))
+		err++;
+	if (strncmp(ft_strjoin("", "4321"), "4321", 5))
+		err++;
+	if (strncmp(ft_strjoin("123", "4321"), "1234321", 8))
+		err++;
 	printf("ft_strjoin total errors: %d\n", err);
 }
 
@@ -698,8 +714,8 @@ int	main(void)
 	test_ft_atoi();		//done && tested
 	test_ft_calloc();	//done
 	test_ft_strdup();	//done
-	test_ft_substr();	//done
-	test_ft_strjoin();	//done
+	test_ft_substr();	//done && tested
+	test_ft_strjoin();	//done && tested
 	test_ft_strtrim();
 	test_ft_split();	//done
 	test_ft_itoa();		//done && tested
