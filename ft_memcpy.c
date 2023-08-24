@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 11:13:39 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/22 19:28:38 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/24 01:16:23 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	mem_overlap(const void *s1, const void *s2, size_t n)
 {
 	size_t		count;
-	
+
 	count = 0;
 	while (count < n)
 	{
