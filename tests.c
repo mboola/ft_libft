@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/24 13:23:49 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:43:57 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -640,11 +640,36 @@ void	test_ft_itoa(void)
 	printf("ft_itoa total errors: %d\n", err);
 }
 
+char	test_ft_param1(unsigned int num, char c)
+{
+	return (c + num);
+}
+
+char	test_ft_param2(unsigned int num, char c)
+{
+	return (c);
+}
+
+char	test_ft_param3(unsigned int num, char c)
+{
+	if (num % 2 == 0)
+		return ('0');
+	return (c);
+}
+
 void	test_ft_strmapi(void)
 {
 	int	err;
 
 	err = 0;
+	if (strncmp(ft_strmapi("abc", test_ft_param1), "ace", 4))
+		err++;
+	if (strncmp(ft_strmapi("", test_ft_param1), "", 1))
+		err++;
+	if (strncmp(ft_strmapi("abc", test_ft_param2), "abc", 4))
+		err++;
+	if (strncmp(ft_strmapi("abcdef", test_ft_param3), "0b0d0f", 7))
+		err++;
 	printf("ft_strmapi total errors: %d\n", err);
 }
 
@@ -719,7 +744,7 @@ int	main(void)
 	test_ft_strtrim();
 	test_ft_split();	//done
 	test_ft_itoa();		//done && tested
-	test_ft_strmapi();
+	test_ft_strmapi();	//done && tested
 	test_ft_striteri();
 	test_ft_putchar_fd();
 	test_ft_putstr_fd();
