@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/25 17:43:57 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:24:21 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -660,8 +660,11 @@ char	test_ft_param3(unsigned int num, char c)
 void	test_ft_strmapi(void)
 {
 	int	err;
+	char	str[] = "abc";
 
 	err = 0;
+	if (ft_strmapi(str, test_ft_param1) == &str[0])
+		err++;
 	if (strncmp(ft_strmapi("abc", test_ft_param1), "ace", 4))
 		err++;
 	if (strncmp(ft_strmapi("", test_ft_param1), "", 1))
@@ -673,11 +676,28 @@ void	test_ft_strmapi(void)
 	printf("ft_strmapi total errors: %d\n", err);
 }
 
+void	test_ft_param4(unsigned int num, char *c)
+{
+	*c = *c + num;
+}
+
 void	test_ft_striteri(void)
 {
 	int	err;
+	char	str[] = "abc";
+	char	str2[] = "";
+	char	*ptr;
+	char	*ptr2;
 
+	ptr = &str[0];
+	ptr2 = &str2[0];
 	err = 0;
+	ft_striteri(ptr, test_ft_param4);
+	if (strncmp(ptr, "ace", 4))
+		err++;
+	ft_striteri(ptr2, test_ft_param4);
+	if (strncmp(ptr2, "", 1))
+		err++;
 	printf("ft_striteri total errors: %d\n", err);
 }
 
@@ -745,10 +765,10 @@ int	main(void)
 	test_ft_split();	//done
 	test_ft_itoa();		//done && tested
 	test_ft_strmapi();	//done && tested
-	test_ft_striteri();
-	test_ft_putchar_fd();
-	test_ft_putstr_fd();
-	test_ft_putendl_fd();
-	test_ft_putnbr_fd();
+	test_ft_striteri();	//done && tested
+	test_ft_putchar_fd();	//done
+	test_ft_putstr_fd();	//done
+	test_ft_putendl_fd();	//done
+	test_ft_putnbr_fd();	//done
 	return (0);
 }
