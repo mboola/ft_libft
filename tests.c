@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/26 03:04:29 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/26 13:50:47 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -733,7 +733,7 @@ void	test_ft_putnbr_fd(void)
 	printf("ft_putnbr_fd total errors: %d\n", err);
 }
 
-void	test_ft_lstnew_bonus(void)
+int	test_ft_lstnew_bonus(void)
 {
 	int	err;
 	t_list	*list;
@@ -745,28 +745,45 @@ void	test_ft_lstnew_bonus(void)
 	if (list->next != NULL)
 		err++;
 	printf("ft_lstnew_bonus total errors: %d\n", err);
+	return (err);
 }
 
-void	test_ft_lstadd_front(void)
+int	test_ft_lstadd_front(void)
 {
 	int	err;
 	int	value1;
 	int	value2;
 	int	value3;
 	t_list	*list;
+	t_list	**list2;
 	t_list	*node1;
 	t_list	*node2;
 	t_list	*node3;
 
 	err = 0;
-	value1 = 1;
-	value2 = 2;
-	value3 = 3;
-	node1 = ft_lstnew(&value1);
-//	printf("%p\n", node1);
+	list2 = NULL;
+	node1 = NULL;
+	ft_lstadd_front(list2, node1);
+	if (list2 != NULL)
+		err++;
+
+	list = NULL;
+	ft_lstadd_front(&list, node1);
+	if (list != NULL)
+		err++;
+
+	list = node1;
 	node2 = ft_lstnew(&value2);
 //	printf("%p\n", node2);
+	ft_lstadd_front(&list, node2);
+	if (list != node2)
+		err++;
+	if (list->next != NULL)
+		err++;
+
+	node1 = ft_lstnew(&value1);
 	list = node1;
+//	printf("%p\n", node1);
 	ft_lstadd_front(&list, node2);
 	if (list != node2)
 		err++;
@@ -796,6 +813,144 @@ void	test_ft_lstadd_front(void)
 	if (list->next->next->next != NULL)
 		err++;
 	printf("ft_lstadd_front total errors: %d\n", err);
+	return (err);
+}
+
+int		*aux_new_ptr(int value)
+{
+	int	*i;
+
+	i = malloc(sizeof(int) * 1);
+	*i = value;
+	return(i);
+}
+
+int	test_ft_lstsize_bonus(void)
+{
+	int		err;
+	int		i;
+	int		*ptr;
+	t_list	*list;
+	t_list	*node;
+
+	err = 0;
+
+	node = ft_lstnew(aux_new_ptr(0));
+	if (ft_lstsize(node) != 1)
+		err++;
+
+	list = NULL;
+	if (ft_lstsize(list) != 0)
+		err++;
+
+	list = ft_lstnew(aux_new_ptr(1));
+	ft_lstadd_front(&list, node);
+
+	i = 2;
+	while (i < 10)
+	{
+		node = ft_lstnew(aux_new_ptr(i));
+		ft_lstadd_front(&list, node);
+		i++;
+	}
+	if (ft_lstsize(list) != 10)
+		err++;
+
+	printf("ft_lstsize total errors: %d\n", err);
+	return (err);
+}
+
+int test_ft_lstlast_bonus(void)
+{
+	int	err;
+	int	value1;
+	int	value2;
+	t_list	*list;
+	t_list	*node1;
+	t_list	*node2;
+
+	err = 0;
+	node1 = ft_lstnew(&value1);
+	if (ft_lstlast(node1) != node1)
+		err++;
+	node2 = NULL;
+	if (ft_lstlast(node2) != NULL)
+		err++;
+//	printf("%p\n", node1);
+	node2 = ft_lstnew(&value2);
+//	printf("%p\n", node2);
+	list = node1;
+	ft_lstadd_front(&list, node2);
+	if (ft_lstlast(list) != node1)
+		err++;
+	printf("ft_lstlast total errors: %d\n", err);
+	return (err);
+}
+
+int	test_ft_lstadd_back(void)
+{
+	int	err;
+	int	value1;
+	int	value2;
+	int	value3;
+	t_list	*list;
+	t_list	**list2;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*node3;
+
+	err = 0;
+	list2 = NULL;
+	node1 = NULL;
+	ft_lstadd_back(list2, node1);
+	if (list2 != NULL)
+		err++;
+
+	list = NULL;
+	ft_lstadd_back(&list, node1);
+	if (list != NULL)
+		err++;
+
+	list = node1;
+	node2 = ft_lstnew(&value2);
+//	printf("%p\n", node2);
+	ft_lstadd_back(&list, node2);
+	if (list != node2)
+		err++;
+
+	node1 = ft_lstnew(&value1);
+	list = node1;
+//	printf("%p\n", node1);
+	ft_lstadd_back(&list, node2);
+	if (list != node1)
+		err++;
+	if (list->content != &value1)
+		err++;
+	if (list->next != node2)
+		err++;
+	if (list->next->content != &value2)
+		err++;
+	if (list->next->next != NULL)
+		err++;
+
+	node3 = ft_lstnew(&value3);
+	ft_lstadd_back(&list, node3);
+	if (list != node1)
+		err++;
+	if (list->content != &value1)
+		err++;
+	if (list->next != node2)
+		err++;
+	if (list->next->content != &value2)
+		err++;
+	if (list->next->next != node3)
+		err++;
+	if (list->next->next->content != &value3)
+		err++;
+	if (list->next->next->next != NULL)
+		err++;
+	printf("ft_lstadd_back total errors: %d\n", err);
+	return (err);
 }
 
 int	main(int argc, char **argv)
@@ -838,8 +993,16 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		test_ft_lstnew_bonus();	//done && tested
-		test_ft_lstadd_front();	//done && tested
+		if (test_ft_lstnew_bonus())		//done && tested
+			return (0);
+		if (test_ft_lstadd_front())		//done && tested
+			return (0);
+		if (test_ft_lstsize_bonus())	//done && tested
+			return (0);
+		if (test_ft_lstlast_bonus())	//done && tested
+			return (0);
+		if (test_ft_lstadd_back())		//done && tested
+			return (0);
 	}
 	return (0);
 }
