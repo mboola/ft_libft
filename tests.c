@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/25 18:24:21 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/08/26 03:04:29 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -733,7 +733,72 @@ void	test_ft_putnbr_fd(void)
 	printf("ft_putnbr_fd total errors: %d\n", err);
 }
 
-int	main(void)
+void	test_ft_lstnew_bonus(void)
+{
+	int	err;
+	t_list	*list;
+
+	err = 0;
+	list = ft_lstnew(&err);
+	if (list->content != &err)
+		err++;
+	if (list->next != NULL)
+		err++;
+	printf("ft_lstnew_bonus total errors: %d\n", err);
+}
+
+void	test_ft_lstadd_front(void)
+{
+	int	err;
+	int	value1;
+	int	value2;
+	int	value3;
+	t_list	*list;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*node3;
+
+	err = 0;
+	value1 = 1;
+	value2 = 2;
+	value3 = 3;
+	node1 = ft_lstnew(&value1);
+//	printf("%p\n", node1);
+	node2 = ft_lstnew(&value2);
+//	printf("%p\n", node2);
+	list = node1;
+	ft_lstadd_front(&list, node2);
+	if (list != node2)
+		err++;
+	if (list->content != &value2)
+		err++;
+//	printf("%p\n", list->next);
+	if (list->next != node1)
+		err++;
+	if (list->next->content != &value1)
+		err++;
+	if (list->next->next != NULL)
+		err++;
+	node3 = ft_lstnew(&value3);
+	ft_lstadd_front(&list, node3);
+	if (list != node3)
+		err++;
+	if (list->content != &value3)
+		err++;
+	if (list->next != node2)
+		err++;
+	if (list->next->content != &value2)
+		err++;
+	if (list->next->next != node1)
+		err++;
+	if (list->next->next->content != &value1)
+		err++;
+	if (list->next->next->next != NULL)
+		err++;
+	printf("ft_lstadd_front total errors: %d\n", err);
+}
+
+int	main(int argc, char **argv)
 {
 	srand(time(NULL));
 	test_ft_isalpha();	//done && tested
@@ -770,5 +835,11 @@ int	main(void)
 	test_ft_putstr_fd();	//done
 	test_ft_putendl_fd();	//done
 	test_ft_putnbr_fd();	//done
+
+	if (argc > 1)
+	{
+		test_ft_lstnew_bonus();	//done && tested
+		test_ft_lstadd_front();	//done && tested
+	}
 	return (0);
 }
