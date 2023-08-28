@@ -953,39 +953,215 @@ int	test_ft_lstadd_back(void)
 	return (err);
 }
 
+void	del_one(void *ptr)
+{
+	free(ptr);
+}
+
+int	test_ft_lstdelone(void)
+{
+	int	err;
+	int	*ptr;
+	int	*ptr2;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*list;
+
+	err = 0;
+	ptr = malloc(sizeof(int));
+	node1 = ft_lstnew(ptr);
+	list = NULL;
+	ft_lstadd_back(&list, node1);
+	ptr2 = malloc(sizeof(int));
+	node2 = ft_lstnew(ptr2);
+	ft_lstadd_back(&list, node2);
+	ft_lstdelone(list, del_one);
+
+	//use Valgrind here and check what it says
+	//if (node1->content == ptr)
+	//	err++;
+	//if (node1->next == NULL)
+	//	err++;
+
+	printf("ft_lstdelone total errors: %d\n", err);
+	return (err);
+}
+
+int	test_ft_lstclear(void)
+{
+	int	err;
+	int	*ptr;
+	int	*ptr2;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*list;
+
+	err = 0;
+	ptr = malloc(sizeof(int));
+	node1 = ft_lstnew(ptr);
+	list = NULL;
+	ft_lstadd_back(&list, node1);
+	ptr2 = malloc(sizeof(int));
+	node2 = ft_lstnew(ptr2);
+	ft_lstadd_back(&list, node2);
+	ft_lstclear(&list, del_one);
+
+	//use Valgrind here and check what it says
+	//if (node1->content == ptr)
+	//	err++;
+	//if (node1->next == NULL)
+	//	err++;
+	//if (node2->content == ptr2)
+	//	err++;
+	//if (node2->next == NULL)
+	//	err++;
+
+	ptr = malloc(sizeof(int));
+	node1 = ft_lstnew(ptr);
+	list = NULL;
+	ft_lstadd_back(&list, node1);
+	ptr2 = malloc(sizeof(int));
+	node2 = ft_lstnew(ptr2);
+	ft_lstadd_back(&list, node2);
+	ft_lstclear(&node2, del_one);
+
+	if (node1->content != ptr)
+		err++;
+	if (node1->next == NULL)
+		err++;
+	//valgrind
+	//if (node2->content == ptr2)
+	//	err++;
+	//if (node2->next == NULL)
+	//	err++;
+	printf("ft_lstclear total errors: %d\n", err);
+	return (err);
+}
+
+void	print_content(void	*content)
+{
+	printf("a%d\n", *(int*)(content));
+}
+
+void	set_42(void *content)
+{
+	*(int *)content = 42;
+}
+
+int	test_ft_lstiter(void)
+{
+	int	err;
+	int	value1;
+	int	value2;
+	int	*ptr;
+	int	*ptr2;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*list;
+
+	err = 0;
+	value1 = 0;
+	value2 = 1;
+	ptr = &value1;
+	ptr2 = &value2;
+
+	node1 = ft_lstnew(ptr);
+	list = NULL;
+	ft_lstadd_back(&list, node1);
+	node2 = ft_lstnew(ptr2);
+	ft_lstadd_back(&list, node2);
+
+	ft_lstiter(list, print_content);
+	ft_lstiter(list, set_42);
+	ft_lstiter(list, print_content);
+
+	printf("ft_lstiter total errors: %d\n", err);
+	return (err);
+}
+
+void	*set_42_v2(void *content)
+{
+	void	*cont2;
+
+	cont2 = malloc(sizeof(int));
+
+	*(int *)cont2 = 42;
+}
+
+int	test_ft_lstmap(void)
+{
+	int	err;
+	int	value1;
+	int	value2;
+	int	*ptr;
+	int	*ptr2;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*list;
+	t_list	*list2;
+
+	err = 0;
+	value1 = 0;
+	value2 = 1;
+	ptr = &value1;
+	ptr2 = &value2;
+
+	list = NULL;
+	list2 = ft_lstmap(list, set_42_v2, del_one);
+	ft_lstiter(list, print_content);
+	ft_lstiter(list2, print_content);
+	
+	node1 = ft_lstnew(ptr);
+	ft_lstadd_back(&list, node1);
+	list2 = ft_lstmap(list, set_42_v2, del_one);
+	ft_lstiter(list, print_content);
+	ft_lstiter(list2, print_content);
+
+	node2 = ft_lstnew(ptr2);
+	ft_lstadd_back(&list, node2);
+	list2 = ft_lstmap(list, set_42_v2, del_one);
+	ft_lstiter(list, print_content);
+	ft_lstiter(list2, print_content);
+	//ft_lstiter(list, set_42);
+	//ft_lstiter(list, print_content);
+
+	printf("ft_lstmap total errors: %d\n", err);
+	return (err);
+}
+
 int	main(int argc, char **argv)
 {
 	srand(time(NULL));
-	test_ft_isalpha();	//done && tested
-	test_ft_isdigit();	//done && tested
-	test_ft_isalnum();	//done && tested
-	test_ft_isascii();	//done && tested
-	test_ft_isprint();	//done && tested
-	test_ft_strlen();	//done && tested
-	test_ft_memset();	//done && tested
-	test_ft_bzero();	//done && tested
-	test_ft_memcpy();	//done && tested
-	test_ft_memmove();	//done
-	test_ft_strlcpy();	//done
-	test_ft_strlcat();	//done
-	test_ft_toupper();	//done && tested
-	test_ft_tolower();	//done && tested
-	test_ft_strchr();	//done && tested
-	test_ft_strrchr();	//done && tested
-	test_ft_strncmp();	//done && tested
-	test_ft_memchr();	//done && tested
-	test_ft_memcmp();	//done && tested
-	test_ft_strnstr();	//done && tested
-	test_ft_atoi();		//done && tested
-	test_ft_calloc();	//done
-	test_ft_strdup();	//done
-	test_ft_substr();	//done && tested
-	test_ft_strjoin();	//done && tested
+	test_ft_isalpha();		//done && tested
+	test_ft_isdigit();		//done && tested
+	test_ft_isalnum();		//done && tested
+	test_ft_isascii();		//done && tested
+	test_ft_isprint();		//done && tested
+	test_ft_strlen();		//done && tested
+	test_ft_memset();		//done && tested
+	test_ft_bzero();		//done && tested
+	test_ft_memcpy();		//done && tested
+	test_ft_memmove();		//done
+	test_ft_strlcpy();		//done
+	test_ft_strlcat();		//done
+	test_ft_toupper();		//done && tested
+	test_ft_tolower();		//done && tested
+	test_ft_strchr();		//done && tested
+	test_ft_strrchr();		//done && tested
+	test_ft_strncmp();		//done && tested
+	test_ft_memchr();		//done && tested
+	test_ft_memcmp();		//done && tested
+	test_ft_strnstr();		//done && tested
+	test_ft_atoi();			//done && tested
+	test_ft_calloc();		//done
+	test_ft_strdup();		//done
+	test_ft_substr();		//done && tested
+	test_ft_strjoin();		//done && tested
 	test_ft_strtrim();
-	test_ft_split();	//done
-	test_ft_itoa();		//done && tested
-	test_ft_strmapi();	//done && tested
-	test_ft_striteri();	//done && tested
+	test_ft_split();		//done
+	test_ft_itoa();			//done && tested
+	test_ft_strmapi();		//done && tested
+	test_ft_striteri();		//done && tested
 	test_ft_putchar_fd();	//done
 	test_ft_putstr_fd();	//done
 	test_ft_putendl_fd();	//done
@@ -1002,6 +1178,14 @@ int	main(int argc, char **argv)
 		if (test_ft_lstlast_bonus())	//done && tested
 			return (0);
 		if (test_ft_lstadd_back())		//done && tested
+			return (0);
+		if (test_ft_lstdelone())		//done && tested (valgrind)
+			return (0);
+		if (test_ft_lstclear())			//done && tested (valgrind)
+			return (0);
+		if (test_ft_lstiter())			//done && tested (terminal)
+			return (0);
+		if (test_ft_lstmap())			//done && tested (terminal)
 			return (0);
 	}
 	return (0);
