@@ -6,27 +6,19 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 17:59:17 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/21 02:00:22 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:38:09 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	cannot_mult(size_t nmemb, size_t size)
-{
-	if (nmemb > INT_MAX || size > INT_MAX)
-		return (1);
-	if (INT_MAX / nmemb < size)
-		return (1);
-	return (0);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;
 
-	if (cannot_mult(nmemb, size))
+	ptr = malloc(count * size);
+	if (ptr == NULL)
 		return (NULL);
-	ptr = malloc(size * nmemb);
+	ft_bzero(ptr, count * size);
 	return (ptr);
 }
