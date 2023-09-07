@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int	count_strings(const char *str, char c)
+static int	count_strings(const char *str, char c)
 {
 	int	n_strs;
 	int	n_chars;
@@ -41,7 +42,18 @@ int	count_strings(const char *str, char c)
 	return (n_strs);
 }
 
-void	trnfrm_str_to_mat(const char *str, char c, int length, char **matrix)
+static int	free_matrix(char **matrix, int i)
+{
+	while (i >= 0)
+	{
+		free(*(matrix + i));
+		i--;
+	}
+	free(matrix);
+	return (0);
+}
+
+static int	create_matrix(const char *str, char c, int length, char **matrix)
 {
 	int		i;
 	int		word;
@@ -50,22 +62,24 @@ void	trnfrm_str_to_mat(const char *str, char c, int length, char **matrix)
 	word = 0;
 	while (i < length && *(str + word) != '\0')
 	{
-		if (*str == c)
+		if (*str == c && word != 0)
 		{
-			if (word != 0)
-			{
-				ft_strlcpy(matrix[i], str, word);
-				i++;
-				str = str + word;
-				word = 0;
-			}
-			str++;
+			*(matrix + i) = ft_substr(str, 0, word);
+			if (*(matrix + i) == NULL)
+				return (free_matrix(matrix, i));
+			printf("%s\n", *matrix + i);
+			i++;
+			str = str + word;
+			word = 0;
 		}
+		else if (*str == c)
+			str++;
 		else
 			word++;
 	}
 	if (word != 0)
-		ft_strlcpy(matrix[i], str, word);
+		ft_strlcpy(*(matrix + i), str, word + 1);
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
@@ -79,7 +93,8 @@ char	**ft_split(char const *s, char c)
 	matrix = malloc(sizeof(char *) * (length + 1));
 	if (matrix == NULL)
 		return (NULL);
-	trnfrm_str_to_mat(s, c, length, matrix);
+	if (create_matrix(s, c, length, matrix) == 0)
+		return (NULL);
 	matrix[length] = NULL;
 	return (matrix);
 }
