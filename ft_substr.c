@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		str_len = 1;
 	else
 	{
-		if ((s_len - start + 1) > len)
+		if ((s_len - start + 1) < len)
 			str_len = (s_len - start + 1) * (len > 0) + 1;
 		else
 			str_len = len * (s_len > 0) + 1;
