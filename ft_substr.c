@@ -15,14 +15,25 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
+	size_t	s_len;
+	size_t	str_len;
 
-	if (ft_strlen(s) <= start)
-		return (NULL);
-	if (len + 1 > INT_MAX)
-		return (NULL);
-	str = malloc(sizeof(char) * (len + 1));
+	s_len = ft_strlen(s);
+	if (s_len < start)
+		str_len = 1;
+	else
+	{
+		if ((s_len - start + 1) > len)
+			str_len = (s_len - start + 1) * (len > 0) + 1;
+		else
+			str_len = len * (s_len > 0) + 1;
+	}
+	str = malloc(sizeof(char) * str_len);
 	if (str == NULL)
 		return (NULL);
-	ft_strlcpy(str, s + start, len + 1);
+	if (str_len == 1)
+		*str = '\0';
+	else
+		ft_strlcpy(str, s + start, str_len);
 	return (str);
 }
