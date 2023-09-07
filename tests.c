@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 18:16:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/26 13:50:47 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:36:19 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	test_ft_isalpha(void)
 	while (tmp < 127)
 	{
 		//printf("Value '%d' ft_isalpha: '%d' isalpha: '%d'\n", tmp, ft_isalpha(tmp), isalpha(tmp));
-		if ((ft_isalpha(tmp) == 0 && isalpha(tmp) != 0) || ft_isalpha(tmp) != 0 && isalpha(tmp) == 0)
+		if ((ft_isalpha(tmp) == 0 && isalpha(tmp) != 0) || (ft_isalpha(tmp) != 0 && isalpha(tmp) == 0))
 			err++;
 		tmp++;
 	}
@@ -136,7 +136,6 @@ void	test_ft_isprint(void)
 void	test_ft_strlen(void)
 {
 	int	err;
-	size_t	result;
 
 	err = 0;
 	if (ft_strlen("") != strlen(""))
@@ -304,16 +303,52 @@ void	test_ft_memmove(void)
 void	test_ft_strlcpy(void)
 {
 	int	err;
+	char	str1[] = "abcd";
+	char	str2[5];
+	char	str3[] ="0123456789";
+	size_t	count;
 
 	err = 0;
+	count = ft_strlcpy(str2, str1, strlen(str1) + 1);
+	if (count != strlen(str1))
+		err++;
+	if (strncmp(str2, str1, strlen(str1) + 1))
+		err++;
+	count = ft_strlcpy(str3, str1, strlen(str1) + 1);
+	if (count != strlen(str1))
+		err++;
+	if (strncmp(str3, str1, strlen(str1) + 1))
+		err++;
+	if (strncmp(str3, "abcd\0\\56789", 11))
+		err++;
 	printf("ft_strlcpy total errors: %d\n", err);
 }
 
 void	test_ft_strlcat(void)
 {
 	int	err;
+	char	str1[] = "abcd";
+	char	str2[5] = "\0";
+	char	str3[15] = "0123456789";
+	char	*dest;
+	size_t	count;
+	size_t	len1;
+	size_t	len2;
 
 	err = 0;
+	len1 = strlen(str1);
+	len2 = strlen(str2);
+	count = ft_strlcat(str2, str1, len2 + len1 + 1);
+	if (count != len1 + len2)
+		err++;
+	if (strncmp(str2, "abcd", 5))
+		err++;
+	len2 = strlen(str3);
+	count = ft_strlcat(str3, str1, len2 + len1 + 1);
+	if (count != len1 + len2)
+		err++;
+	if (strncmp(str3, "0123456789abcd", 15))
+		err++;
 	printf("ft_strlcat total errors: %d\n", err);
 }
 
@@ -408,10 +443,26 @@ void	test_ft_strncmp(void)
 	if (ft_strncmp(str, str2, 5) != strncmp(str, str2, 5))
 		err++;
 	str = &s2[0];
+	printf("%d\n", ft_strncmp(str, str2, 0));
+	printf("%d\n", strncmp(str, str2, 0));
 	if (ft_strncmp(str, str2, 0) != strncmp(str, str2, 0))
 		err++;
+
+	str = &s2[0];
+	str2 = &s1[0];
+
 	if (ft_strncmp(str, str2, 3) != strncmp(str, str2, 3))
 		err++;
+	printf("%d\n", ft_strncmp(str2, str, 3));
+	printf("%d\n", strncmp(str2, str, 3));
+	if (ft_strncmp(str2, str, 3) != strncmp(str2, str, 3))
+		err++;
+
+	printf("%d\n", ft_strncmp("\20", "\0", 6));
+	printf("%d\n", '\20');
+	printf("%d\n", '\0');
+	printf("%d\n", strncmp("\20", "\0", 6));
+
 	printf("ft_strncmp total errors: %d\n", err);
 }
 
@@ -622,7 +673,6 @@ void	test_ft_split(void)
 void	test_ft_itoa(void)
 {
 	int	err;
-	int	num;
 
 	err = 0;
 //	printf("%s\n", ft_itoa(0));
@@ -829,7 +879,6 @@ int	test_ft_lstsize_bonus(void)
 {
 	int		err;
 	int		i;
-	int		*ptr;
 	t_list	*list;
 	t_list	*node;
 
@@ -1086,6 +1135,7 @@ void	*set_42_v2(void *content)
 	cont2 = malloc(sizeof(int));
 
 	*(int *)cont2 = 42;
+	return (cont2);
 }
 
 int	test_ft_lstmap(void)
@@ -1142,7 +1192,7 @@ int	main(int argc, char **argv)
 	test_ft_bzero();		//done && tested
 	test_ft_memcpy();		//done && tested
 	test_ft_memmove();		//done
-	test_ft_strlcpy();		//done
+	test_ft_strlcpy();		//done && tested
 	test_ft_strlcat();		//done
 	test_ft_toupper();		//done && tested
 	test_ft_tolower();		//done && tested
