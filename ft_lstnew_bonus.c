@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 02:02:26 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/26 02:16:42 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:25:55 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	node->content = content;
 	node->next = NULL;
-	return (node);	
+	return (node);
 }
