@@ -6,7 +6,7 @@
 /*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:08:32 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/25 18:22:17 by mpovill-         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:29:27 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_putnbr_fd(int n, int fd)
 
 	if (n < 0)
 	{
-		ft_putchar_fd(fd, '-');
+		ft_putchar_fd('-', fd);
 		number = n * -1;
 	}
 	else
