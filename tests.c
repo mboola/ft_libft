@@ -443,25 +443,12 @@ void	test_ft_strncmp(void)
 	if (ft_strncmp(str, str2, 5) != strncmp(str, str2, 5))
 		err++;
 	str = &s2[0];
-	printf("%d\n", ft_strncmp(str, str2, 0));
-	printf("%d\n", strncmp(str, str2, 0));
 	if (ft_strncmp(str, str2, 0) != strncmp(str, str2, 0))
 		err++;
-
-	str = &s2[0];
-	str2 = &s1[0];
-
 	if (ft_strncmp(str, str2, 3) != strncmp(str, str2, 3))
 		err++;
-	printf("%d\n", ft_strncmp(str2, str, 3));
-	printf("%d\n", strncmp(str2, str, 3));
 	if (ft_strncmp(str2, str, 3) != strncmp(str2, str, 3))
 		err++;
-
-	printf("%d\n", ft_strncmp("\20", "\0", 6));
-	printf("%d\n", '\20');
-	printf("%d\n", '\0');
-	printf("%d\n", strncmp("\20", "\0", 6));
 
 	printf("ft_strncmp total errors: %d\n", err);
 }
@@ -617,7 +604,7 @@ void	test_ft_substr(void)
 		err++;
 	if (strncmp(ft_substr("test2", 2, 3), "st2", 4))
 		err++;
-	if (ft_substr("1", 3, 1) != NULL)
+	if (strncmp(ft_substr("1", 3, 1), "", 2))
 		err++;
 	if (strncmp(ft_substr("0123", 0, 4), "0123", 5))
 		err++;
@@ -665,8 +652,15 @@ void	test_ft_strtrim(void)
 void	test_ft_split(void)
 {
 	int	err;
-
+	char	**str;
 	err = 0;
+	str = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
+	printf("%s\n", *str);
+	/*while (*str != NULL)
+	{
+		printf("%s\n", *str);
+		str++;
+	}*/
 	printf("ft_split total errors: %d\n", err);
 }
 
