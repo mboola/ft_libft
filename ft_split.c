@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	count_strings(const char *str, char c)
 {
@@ -62,12 +61,11 @@ static int	create_matrix(const char *str, char c, int length, char **matrix)
 	word = 0;
 	while (i < length && *(str + word) != '\0')
 	{
-		if (*str == c && word != 0)
+		if (*(str + word) == c && word != 0)
 		{
 			*(matrix + i) = ft_substr(str, 0, word);
 			if (*(matrix + i) == NULL)
 				return (free_matrix(matrix, i));
-			printf("%s\n", *matrix + i);
 			i++;
 			str = str + word;
 			word = 0;
@@ -78,7 +76,7 @@ static int	create_matrix(const char *str, char c, int length, char **matrix)
 			word++;
 	}
 	if (word != 0)
-		ft_strlcpy(*(matrix + i), str, word + 1);
+		*(matrix + i) = ft_substr(str, 0, word);
 	return (1);
 }
 
