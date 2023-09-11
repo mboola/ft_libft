@@ -86,13 +86,19 @@ char	**ft_split(char const *s, char c)
 	char	**matrix;
 
 	length = count_strings(s, c);
-	if (length == 0)
-		return (NULL);
 	matrix = malloc(sizeof(char *) * (length + 1));
 	if (matrix == NULL)
 		return (NULL);
-	if (create_matrix(s, c, length, matrix) == 0)
-		return (NULL);
-	matrix[length] = NULL;
+	if (length == 0)
+	{
+		*matrix = '\0';
+		*(matrix + 1) = NULL;
+	}
+	else
+	{
+		if (create_matrix(s, c, length, matrix) == 0)
+			return (NULL);
+		*(matrix + length) = NULL;
+	}
 	return (matrix);
 }
