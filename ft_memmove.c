@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 12:14:47 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/22 12:30:37 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/13 10:48:29 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/13 10:48:47 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	size_t				count;
 	unsigned char		*ptr_dest;
 
+	if (dest == (void *)0 && src == (void *)0 && n != 0)
+		return ((void *)0);
 	ptr_dest = dest;
 	if (dest > src)
 	{

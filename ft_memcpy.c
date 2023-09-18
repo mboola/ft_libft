@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 11:13:39 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/24 01:16:23 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/13 10:47:30 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/13 10:47:45 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char		*ptr_dest;
 	unsigned const char	*ptr_src;
 
+	if (dest == (void *)0 && src == (void *)0 && n != 0)
+		return ((void *)0);
 	if (dest > src && mem_overlap(src, dest, n))
 		return (ft_memmove(dest, src, n));
 	else if (mem_overlap(dest, src, n))

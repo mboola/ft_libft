@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 16:08:25 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/09/07 11:54:06 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/13 10:49:53 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/13 10:50:07 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 
 	len_dst = ft_strlen(dst);
 	len_src = ft_strlen(src);
-	if (len_dst > dstsize)
+	if (len_dst >= dstsize)
 		return (len_src + dstsize);
 	i = 0;
 	j = len_dst;

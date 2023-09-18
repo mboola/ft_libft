@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 15:27:31 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/22 18:17:36 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/13 10:41:49 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/13 10:42:11 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isascii(int c)
 {

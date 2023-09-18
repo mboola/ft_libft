@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpovill- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 00:38:53 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/08/24 01:09:33 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/13 11:10:56 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/13 11:11:12 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,20 @@ static int	count_strings(const char *str, char c)
 	return (n_strs);
 }
 
-static int	free_matrix(char **matrix, int i)
+static int	add_str_to_matrix(const char *str, int word, int i, char **matrix)
 {
-	while (i >= 0)
+	*(matrix + i) = ft_substr(str, 0, word);
+	if (*(matrix + i) == NULL)
 	{
-		free(*(matrix + i));
-		i--;
+		while (i >= 0)
+		{
+			free(*(matrix + i));
+			i--;
+		}
+		free(matrix);
+		return (0);
 	}
-	free(matrix);
-	return (0);
+	return (1);
 }
 
 static int	create_matrix(const char *str, char c, int length, char **matrix)
@@ -63,9 +68,8 @@ static int	create_matrix(const char *str, char c, int length, char **matrix)
 	{
 		if (*(str + word) == c && word != 0)
 		{
-			*(matrix + i) = ft_substr(str, 0, word);
-			if (*(matrix + i) == NULL)
-				return (free_matrix(matrix, i));
+			if (add_str_to_matrix(str, word, i, matrix) == 0)
+				return (0);
 			i++;
 			str = str + word;
 			word = 0;
@@ -76,7 +80,8 @@ static int	create_matrix(const char *str, char c, int length, char **matrix)
 			word++;
 	}
 	if (word != 0)
-		*(matrix + i) = ft_substr(str, 0, word);
+		if (add_str_to_matrix(str, word, i, matrix) == 0)
+			return (0);
 	return (1);
 }
 
@@ -89,16 +94,8 @@ char	**ft_split(char const *s, char c)
 	matrix = malloc(sizeof(char *) * (length + 1));
 	if (matrix == NULL)
 		return (NULL);
-	if (length == 0)
-	{
-		*matrix = '\0';
-		*(matrix + 1) = NULL;
-	}
-	else
-	{
-		if (create_matrix(s, c, length, matrix) == 0)
-			return (NULL);
-		*(matrix + length) = NULL;
-	}
+	if (create_matrix(s, c, length, matrix) == 0)
+		return (NULL);
+	*(matrix + length) = NULL;
 	return (matrix);
 }
