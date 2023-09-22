@@ -90,6 +90,8 @@ char	**ft_split(char const *s, char c)
 	int		length;
 	char	**matrix;
 
+	if (s == NULL)
+		return (NULL);
 	length = count_strings(s, c);
 	matrix = malloc(sizeof(char *) * (length + 1));
 	if (matrix == NULL)
