@@ -8,10 +8,10 @@ OBJDIR	=	objects
 
 #-----COMPILATION FLAGS
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
 HEADERS			=	-I./${INCLUDE}
+CFLAGS			=	-Wall -Wextra -Werror ${HEADERS}
 OPTIMIZATION	=	-O3
-DEBUG			=	-g
+DEBUG			=	#-g
 
 #-----FILES
 CHECKERS_DIR	=	${SRC}/ft_checkers
@@ -49,12 +49,15 @@ STR_FILE		=	${STR_DIR}/ft_split.c ${STR_DIR}/ft_strchr.c ${STR_DIR}/ft_strdup.c 
 					${STR_DIR}/ft_strncmp.c ${STR_DIR}/ft_strnstr.c ${STR_DIR}/ft_strrchr.c \
 					${STR_DIR}/ft_strtrim.c ${STR_DIR}/ft_substr.c     
 
+FILES	=	${CHECKERS_FILE} ${CONVERTERS_FILE} ${DOLST_FILE} ${LST_FILE} ${MEM_FILE} \
+			${PUT_FD_FILE} ${STR_FILE}
+
 LIBFT_HEADER	=	libft.h
 
 OBJS = ${FILES:.c=.o}
 
-%.o: %.c ${HEADER} Makefile
-	${CC} ${CFLAGS} ${LIBFT_HEADER} ${OPTIMIZATION} -c $< -o $@ ${DEBUG}
+%.o: %.c ${LIBFT_HEADER} Makefile
+	${CC} ${CFLAGS} ${OPTIMIZATION} -c $< -o $@ ${DEBUG}
 
 all: ${NAME}
 
