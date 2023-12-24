@@ -9,8 +9,8 @@ OBJDIR	=	objects
 #-----COMPILATION FLAGS
 CC				=	cc
 HEADERS			=	-I./${INCLUDE}
-CFLAGS			=	-Wall -Wextra -Werror ${HEADERS}
-OPTIMIZATION	=	-O3
+OPTIMIZATION	=	#-O3
+CFLAGS			=	-Wall -Wextra -Werror ${HEADERS} ${OPTIMIZATION}
 DEBUG			=	#-g
 
 #-----FILES
@@ -52,20 +52,28 @@ STR_FILE		=	${STR_DIR}/ft_split.c ${STR_DIR}/ft_strchr.c ${STR_DIR}/ft_strdup.c 
 FILES	=	${CHECKERS_FILE} ${CONVERTERS_FILE} ${DOLST_FILE} ${LST_FILE} ${MEM_FILE} \
 			${PUT_FD_FILE} ${STR_FILE}
 
-LIBFT_HEADER	=	libft.h
+LIBFT_HEADER	=	${INCLUDE}/libft.h
 
 OBJS = ${FILES:.c=.o}
 
 %.o: %.c ${LIBFT_HEADER} Makefile
-	${CC} ${CFLAGS} ${OPTIMIZATION} -c $< -o $@ ${DEBUG}
+	${CC} ${CFLAGS} -c -o $@ $< ${DEBUG}
 
-all: ${NAME}
+#-----MAKE RULE
+all: ${OBJDIR} ${NAME}
+
+#-----RULE TO CREATE THE DIRECTORY OF THE OBJECT FILES
+${OBJDIR}:
+	@echo "Creating objects file directory."
+	@mkdir -p $@
 
 ${NAME}: ${OBJS}
-	ar -rc ${NAME} ${OBJS}
+	@echo "Creating static library file."
+	@ar -rc ${NAME} ${OBJS}
 
 clean:
 	rm -f ${OBJS}
+	rmdir ${OBJDIR}
 
 fclean: clean
 	rm -f ${NAME}
