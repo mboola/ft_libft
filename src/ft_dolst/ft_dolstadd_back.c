@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	ft_dolstadd_back(t_dolist **lst, t_dolist *new)
+void	ft_dolstadd_back(t_dlist **lst, t_dlist *new)
 {
-	t_dolist	*last;
+	t_dlist	*last;
 
 	if (lst == NULL)
 		return ;

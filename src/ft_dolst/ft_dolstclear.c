@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	ft_dolstclear(t_dolist **lst, void (*del)(void *))
+void	ft_dolstclear(t_dlist **lst, void (*del)(void *))
 {
-	t_dolist	*tmp;
+	t_dlist	*tmp;
 
 	if (lst == NULL || *lst == NULL)
 		return ;

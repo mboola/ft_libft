@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-t_dolist	*ft_dolstextract_back(t_dolist **lst)
+t_dlist	*ft_dolstextract_back(t_dlist **lst)
 {
-	t_dolist	*new_last;
-	t_dolist	*lst_iter;
+	t_dlist	*new_last;
+	t_dlist	*lst_iter;
 
 	if (*lst == NULL)
 		return (NULL);

@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-t_dolist	*ft_dolstnew(void *content)
+t_dlist	*ft_dolstnew(void *content)
 {
-	t_dolist	*node;
+	t_dlist	*node;
 
-	node = malloc(sizeof(t_dolist));
+	node = malloc(sizeof(t_dlist));
 	if (node == NULL)
 		return (NULL);
 	node->content = content;

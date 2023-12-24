@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_dolist	*ft_dolstlast(t_dolist *lst)
+t_dlist	*ft_dolstlast(t_dlist *lst)
 {
 	if (lst == NULL)
 		return (NULL);

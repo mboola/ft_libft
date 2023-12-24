@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-t_dolist	*ft_dolstextract_front(t_dolist **lst)
+t_dlist	*ft_dolstextract_front(t_dlist **lst)
 {
-	t_dolist	*first;
+	t_dlist	*first;
 
 	first = *lst;
 	*lst = (*lst)->next;

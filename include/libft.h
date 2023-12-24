@@ -36,12 +36,12 @@ typedef struct t_list
 	void			*content;
 	struct t_list	*next;
 }	t_list;
-typedef struct t_dolist
+typedef struct t_dlist
 {
 	void			*content;
-	struct t_dolist	*next;
-	struct t_dolist	*previous;
-}	t_dolist;
+	struct t_dlist	*next;
+	struct t_dlist	*previous;
+}	t_dlist;
 
 //ft_checkers
 int		ft_isalnum(int c);
@@ -57,14 +57,14 @@ int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 
 //ft_dolst
-t_dolist	*ft_dolstextract_back(t_dolist **lst);
-t_dolist	*ft_dolstextract_front(t_dolist **lst);
-void		ft_dolstadd_back(t_dolist **lst, t_dolist *new);
-void		ft_dolstadd_front(t_dolist **lst, t_dolist *new);
-void		ft_dolstclear(t_dolist **lst, void (*del)(void *));
-void		ft_dolstdelone(t_dolist *lst, void (*del)(void *));
-t_dolist	*ft_dolstlast(t_dolist *lst);
-t_dolist	*ft_dolstnew(void *content);
+t_dlist	*ft_dolstextract_back(t_dlist **lst);
+t_dlist	*ft_dolstextract_front(t_dlist **lst);
+void	ft_dolstadd_back(t_dlist **lst, t_dlist *new);
+void	ft_dolstadd_front(t_dlist **lst, t_dlist *new);
+void	ft_dolstclear(t_dlist **lst, void (*del)(void *));
+void	ft_dolstdelone(t_dlist *lst, void (*del)(void *));
+t_dlist	*ft_dolstlast(t_dlist *lst);
+t_dlist	*ft_dolstnew(void *content);
 
 //ft_lst
 void	ft_lstadd_back(t_list **lst, t_list *new);

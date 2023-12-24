@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_dolstadd_front(t_dolist **lst, t_dolist *new)
+void	ft_dolstadd_front(t_dlist **lst, t_dlist *new)
 {
 	if (lst == NULL || new == NULL)
 		return ;
