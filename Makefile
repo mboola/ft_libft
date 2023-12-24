@@ -8,9 +8,9 @@ OBJDIR	=	objects
 
 #-----COMPILATION FLAGS
 CC				=	cc
+CFLAGS			=	-Wall -Wextra -Werror
 HEADERS			=	-I./${INCLUDE}
 OPTIMIZATION	=	#-O3
-CFLAGS			=	-Wall -Wextra -Werror ${HEADERS} ${OPTIMIZATION}
 DEBUG			=	#-g
 
 #-----FILES
@@ -54,10 +54,14 @@ FILES	=	${CHECKERS_FILE} ${CONVERTERS_FILE} ${DOLST_FILE} ${LST_FILE} ${MEM_FILE
 
 LIBFT_HEADER	=	${INCLUDE}/libft.h
 
+#-----RULE TO GET THE .O COMPILED
 OBJS = ${FILES:.c=.o}
 
+FINAL_OBJ = ${wildcard ${OBJDIR}/*.o}
+
 %.o: %.c ${LIBFT_HEADER} Makefile
-	${CC} ${CFLAGS} -c -o $@ $< ${DEBUG}
+	@${CC} ${CFLAGS} ${HEADERS} ${OPTIMIZATION} -c $< -o $@ ${DEBUG}
+	@mv $@ ./${OBJDIR}
 
 #-----MAKE RULE
 all: ${OBJDIR} ${NAME}
@@ -69,10 +73,10 @@ ${OBJDIR}:
 
 ${NAME}: ${OBJS}
 	@echo "Creating static library file."
-	@ar -rc ${NAME} ${OBJS}
+	@ar -rc ${NAME} ${FINAL_OBJ}
 
 clean:
-	rm -f ${OBJS}
+	rm -f ${FINAL_OBJ}
 	rmdir ${OBJDIR}
 
 fclean: clean
