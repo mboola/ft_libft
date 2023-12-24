@@ -4,7 +4,7 @@ NAME	=	libft.a
 #-----MAIN DIRECTORIES
 SRC		=	src
 INCLUDE	=	include
-OBJDIR	=	objects
+OBJ_DIR	=	objects
 
 #-----COMPILATION FLAGS
 CC				=	cc
@@ -14,72 +14,68 @@ OPTIMIZATION	=	#-O3
 DEBUG			=	#-g
 
 #-----FILES
-CHECKERS_DIR	=	${SRC}/ft_checkers
-CHECKERS_FILE	=	${CHECKERS_DIR}/ft_isalnum.c ${CHECKERS_DIR}/ft_isalpha.c ${CHECKERS_DIR}/ft_isascii.c \
-					${CHECKERS_DIR}/ft_isdigit.c ${CHECKERS_DIR}/ft_isprint.c ${CHECKERS_DIR}/ft_isprint.c \
-					${CHECKERS_DIR}/ft_tolower.c ${CHECKERS_DIR}/ft_toupper.c    
-
-CONVERTERS_DIR	=	${SRC}/ft_converters
-CONVERTERS_FILE	=	${CONVERTERS_DIR}/ft_atoi.c ${CONVERTERS_DIR}/ft_itoa.c
-
-DOLST_DIR		=	${SRC}/ft_dolst
-DOLST_FILE		=	${DOLST_DIR}/ft_dolstadd_back.c ${DOLST_DIR}/ft_dolstadd_front.c \
-					${DOLST_DIR}/ft_dolstclear.c ${DOLST_DIR}/ft_dolstdelone.c \
-					${DOLST_DIR}/ft_dolstextract_back.c ${DOLST_DIR}/ft_dolstextract_front.c \
-					${DOLST_DIR}/ft_dolstlast.c ${DOLST_DIR}/ft_dolstnew.c
-
-LST_DIR			=	${SRC}/ft_lst
-LST_FILE		=	${LST_DIR}/ft_lstadd_back.c ${LST_DIR}/ft_lstadd_front.c ${LST_DIR}/ft_lstclear.c \
-					${LST_DIR}/ft_lstdelone.c ${LST_DIR}/ft_lstiter.c ${LST_DIR}/ft_lstlast.c \
-					${LST_DIR}/ft_lstmap.c ${LST_DIR}/ft_lstnew.c ${LST_DIR}/ft_lstsize.c
-
-MEM_DIR			=	${SRC}/ft_mem
-MEM_FILE		=	${MEM_DIR}/ft_bzero.c ${MEM_DIR}/ft_calloc.c ${MEM_DIR}/ft_memchr.c \
-					${MEM_DIR}/ft_memcmp.c ${MEM_DIR}/ft_memcpy.c ${MEM_DIR}/ft_memmove.c \
-					${MEM_DIR}/ft_memset.c
-
-PUT_FD_DIR		=	${SRC}/ft_put_fd
-PUT_FD_FILE		=	${PUT_FD_DIR}/ft_putchar_fd.c ${PUT_FD_DIR}/ft_putendl_fd.c \
-					${PUT_FD_DIR}/ft_putnbr_fd.c ${PUT_FD_DIR}/ft_putstr_fd.c
-
-STR_DIR			=	${SRC}/ft_str
-STR_FILE		=	${STR_DIR}/ft_split.c ${STR_DIR}/ft_strchr.c ${STR_DIR}/ft_strdup.c \
-					${STR_DIR}/ft_striteri.c ${STR_DIR}/ft_strjoin.c ${STR_DIR}/ft_strlcat.c \
-					${STR_DIR}/ft_strlcpy.c ${STR_DIR}/ft_strlen.c ${STR_DIR}/ft_strmapi.c \
-					${STR_DIR}/ft_strncmp.c ${STR_DIR}/ft_strnstr.c ${STR_DIR}/ft_strrchr.c \
-					${STR_DIR}/ft_strtrim.c ${STR_DIR}/ft_substr.c     
-
-FILES	=	${CHECKERS_FILE} ${CONVERTERS_FILE} ${DOLST_FILE} ${LST_FILE} ${MEM_FILE} \
-			${PUT_FD_FILE} ${STR_FILE}
-
 LIBFT_HEADER	=	${INCLUDE}/libft.h
 
+CHECKERS_DIR	=	${SRC}/ft_checkers
+CHECKERS_FILE	=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
+					ft_isprint.c ft_tolower.c ft_toupper.c    
+
+CONVERTERS_DIR	=	${SRC}/ft_converters
+CONVERTERS_FILE	=	ft_atoi.c ft_itoa.c
+
+DOLST_DIR		=	${SRC}/ft_dolst
+DOLST_FILE		=	ft_dolstadd_back.c ft_dolstadd_front.c ft_dolstclear.c ft_dolstdelone.c \
+					ft_dolstextract_back.c ft_dolstextract_front.c ft_dolstlast.c ft_dolstnew.c
+
+LST_DIR			=	${SRC}/ft_lst
+LST_FILE		=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
+					ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
+
+MEM_DIR			=	${SRC}/ft_mem
+MEM_FILE		=	ft_bzero.c ft_calloc.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
+
+PUT_FD_DIR		=	${SRC}/ft_put_fd
+PUT_FD_FILE		=	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c
+
+STR_DIR			=	${SRC}/ft_str
+STR_FILE		=	ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
+					ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
+					ft_strtrim.c ft_substr.c     
+
+SRC_FILES		=	${addprefix $(CHECKERS_DIR)/,$(CHECKERS_FILE)} \
+					$(addprefix $(CONVERTERS_DIR)/,$(CONVERTERS_FILE)) \
+					$(addprefix $(DOLST_DIR)/,$(DOLST_FILE)) \
+					$(addprefix $(LST_DIR)/,$(LST_FILE)) \
+					$(addprefix $(MEM_DIR)/,$(MEM_FILE)) \
+					$(addprefix $(PUT_FD_DIR)/,$(PUT_FD_FILE)) \
+					$(addprefix $(STR_DIR)/,$(STR_FILE))
+
 #-----RULE TO GET THE .O COMPILED
-OBJS = ${FILES:.c=.o}
+OBJ_FILES = ${patsubst %.c,${OBJ_DIR}/%.o,${notdir ${SRC_FILES}}}
 
-FINAL_OBJ = ${wildcard ${OBJDIR}/*.o}
-
-%.o: %.c ${LIBFT_HEADER} Makefile
-	@${CC} ${CFLAGS} ${HEADERS} ${OPTIMIZATION} -c $< -o $@ ${DEBUG}
-	@mv $@ ./${OBJDIR}
+${OBJ_DIR}/%.o: ${SRC}/*/%.c ${LIBFT_HEADER} Makefile
+	${CC} ${CFLAGS} ${HEADERS} ${OPTIMIZATION} -c $< -o $@ ${DEBUG}
 
 #-----MAKE RULE
-all: ${OBJDIR} ${NAME}
+all: ${OBJ_DIR} ${NAME}
+
+${NAME}: ${OBJ_FILES}
+	@echo "Creating static library file."
+	@ar -rcs $@ $^
 
 #-----RULE TO CREATE THE DIRECTORY OF THE OBJECT FILES
-${OBJDIR}:
+${OBJ_DIR}:
 	@echo "Creating objects file directory."
 	@mkdir -p $@
 
-${NAME}: ${OBJS}
-	@echo "Creating static library file."
-	@ar -rc ${NAME} ${FINAL_OBJ}
-
 clean:
-	rm -f ${FINAL_OBJ}
-	rmdir ${OBJDIR}
+	rm -f ${OBJ_FILES}
 
 fclean: clean
+	@if [ -d ${OBJ_DIR} ]; \
+	then \
+        rmdir ${OBJ_DIR}; \
+    fi
 	rm -f ${NAME}
 
 re: fclean all
