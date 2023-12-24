@@ -34,8 +34,12 @@ LST_FILE		=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_l
 MEM_DIR			=	${SRC}/ft_mem
 MEM_FILE		=	ft_bzero.c ft_calloc.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
 
+PRINTF_DIR		=	${SRC}/ft_printf
+PRINTF_FILE		=	ft_printf.c
+
 PUT_FD_DIR		=	${SRC}/ft_put_fd
-PUT_FD_FILE		=	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c
+PUT_FD_FILE		=	ft_putchar_err.c ft_putendl_err.c ft_putnbr_err.c ft_putnbr_long_err.c \
+					ft_putptr_err.c ft_putstr_err.c ft_putunsnbr_err.c
 
 STR_DIR			=	${SRC}/ft_str
 STR_FILE		=	ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
@@ -47,6 +51,7 @@ SRC_FILES		=	${addprefix $(CHECKERS_DIR)/,$(CHECKERS_FILE)} \
 					$(addprefix $(DOLST_DIR)/,$(DOLST_FILE)) \
 					$(addprefix $(LST_DIR)/,$(LST_FILE)) \
 					$(addprefix $(MEM_DIR)/,$(MEM_FILE)) \
+					$(addprefix $(PRINTF_DIR)/,$(PRINTF_FILE)) \
 					$(addprefix $(PUT_FD_DIR)/,$(PUT_FD_FILE)) \
 					$(addprefix $(STR_DIR)/,$(STR_FILE))
 

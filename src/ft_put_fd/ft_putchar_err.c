@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putchar_err.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 11:15:27 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/09/13 11:15:38 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/13 11:13:30 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/13 11:13:40 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+int	ft_putchar_err(int fd, char c, int *err)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	if (write(fd, &c, 1) < 0)
+		*err = -1;
+	return (1);
 }

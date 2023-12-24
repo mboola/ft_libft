@@ -16,9 +16,19 @@
 # ifndef MAX_INT
 #  define MAX_INT 2147483647
 # endif
+# ifndef HEXLOWBASE
+#  define HEXLOWBASE "0123456789abcdef"
+# endif
+# ifndef HEXHIGHBASE
+#  define HEXHIGHBASE "0123456789ABCDEF"
+# endif
+# ifndef DECBASE
+#  define DECBASE "0123456789"
+# endif
 
-# include <stdlib.h>
+# include <stdarg.h>
 # include <unistd.h>
+# include <stdlib.h>
 
 //structs
 typedef struct t_list
@@ -76,11 +86,17 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 
+//ft_printf
+int		ft_printf(int fd, char const *str, ...);
+
 //ft_put_fd
-void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putchar_err(int fd, char c, int *err);
+int		ft_putendl_fd(int fd, char *str, int *err);
+int		ft_putnbr_err(int fd, int num, char *base, int *err);
+int		ft_putnbr_long_err(int fd, unsigned long number, char *base, int *err);
+int		ft_putptr_err(int fd, void *ptr, int *err);
+int		ft_putstr_err(int fd, char *str, int *err);
+int		ft_putunsnbr_err(int fd, unsigned int nbr, char *base, int *err);
 
 //ft_str
 char	**ft_split(char const *s, char c);

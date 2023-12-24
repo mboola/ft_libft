@@ -1,7 +1,8 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putunsnbr_err.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,27 +13,10 @@
 
 #include "libft.h"
 
-static	void	rec_write_number(unsigned int number, int fd)
+int	ft_putunsnbr_err(int fd, unsigned int nbr, char *base, int *err)
 {
-	if (number / 10 < 1)
-		ft_putchar_fd(number + '0', fd);
-	else
-	{
-		rec_write_number(number / 10, fd);
-		ft_putchar_fd((number % 10) + '0', fd);
-	}
-}
+	unsigned long	n;
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	unsigned int	number;
-
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		number = n * -1;
-	}
-	else
-		number = n;
-	rec_write_number(number, fd);
+	n = 0 + nbr;
+	return (ft_putnbr_long_err(fd, n, base, err));
 }

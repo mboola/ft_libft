@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putptr_err.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 11:14:24 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/09/13 11:14:49 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/14 12:11:32 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/14 12:20:50 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putptr_err(int fd, void *ptr, int *err)
 {
-	while (*s != '\0')
+	unsigned long	addr;
+
+	ft_putstr_err(fd, "0x", err);
+	if (!*err)
 	{
-		ft_putchar_fd(*s, fd);
-		s++;
+		addr = (unsigned long)ptr;
+		return (ft_putnbr_long_err(fd, addr, HEXLOWBASE, err) + 2);
 	}
+	return (0);
 }
