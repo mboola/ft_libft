@@ -47,8 +47,8 @@ int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 
 //ft_dolst
-t_dolist	*ft_dolst_extractback(t_dolist **lst);
-t_dolist	*ft_dolst_extractfront(t_dolist **lst);
+t_dolist	*ft_dolstextract_back(t_dolist **lst);
+t_dolist	*ft_dolstextract_front(t_dolist **lst);
 void		ft_dolstadd_back(t_dolist **lst, t_dolist *new);
 void		ft_dolstadd_front(t_dolist **lst, t_dolist *new);
 void		ft_dolstclear(t_dolist **lst, void (*del)(void *));

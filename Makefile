@@ -23,7 +23,10 @@ CONVERTERS_DIR	=	${SRC}/ft_converters
 CONVERTERS_FILE	=	${CONVERTERS_DIR}/ft_atoi.c ${CONVERTERS_DIR}/ft_itoa.c
 
 DOLST_DIR		=	${SRC}/ft_dolst
-DOLST_FILE		=	${DOLST_DIR}/ft_dolstdelone.c
+DOLST_FILE		=	${DOLST_DIR}/ft_dolstadd_back.c ${DOLST_DIR}/ft_dolstadd_front.c \
+					${DOLST_DIR}/ft_dolstclear.c ${DOLST_DIR}/ft_dolstdelone.c \
+					${DOLST_DIR}/ft_dolstextract_back.c ${DOLST_DIR}/ft_dolstextract_front.c \
+					${DOLST_DIR}/ft_dolstlast.c ${DOLST_DIR}/ft_dolstnew.c
 
 LST_DIR			=	${SRC}/ft_lst
 LST_FILE		=	${LST_DIR}/ft_lstadd_back.c ${LST_DIR}/ft_lstadd_front.c ${LST_DIR}/ft_lstclear.c \
