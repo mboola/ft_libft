@@ -12,6 +12,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 HEADERS			=	-I./${INCLUDE}
 OPTIMIZATION	=	#-O3
 DEBUG			=	#-g
+BUFFER_SIZE		=	#-D BUFFER_SIZE=1024
 
 #-----FILES
 LIBFT_HEADER	=	${INCLUDE}/libft.h
@@ -62,7 +63,7 @@ SRC_FILES		=	${addprefix $(CHECKERS_DIR)/,$(CHECKERS_FILE)} \
 OBJ_FILES = ${patsubst %.c,${OBJ_DIR}/%.o,${notdir ${SRC_FILES}}}
 
 ${OBJ_DIR}/%.o: ${SRC}/*/%.c ${LIBFT_HEADER} Makefile
-	${CC} ${CFLAGS} ${HEADERS} ${OPTIMIZATION} -c $< -o $@ ${DEBUG}
+	${CC} ${CFLAGS} ${HEADERS} ${OPTIMIZATION} ${BUFFER_SIZE} -c $< -o $@ ${DEBUG}
 
 #-----MAKE RULE
 all: ${OBJ_DIR} ${NAME}

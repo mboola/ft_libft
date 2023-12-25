@@ -16,6 +16,8 @@
 # ifndef MAX_INT
 #  define MAX_INT 2147483647
 # endif
+
+//printf
 # ifndef HEXLOWBASE
 #  define HEXLOWBASE "0123456789abcdef"
 # endif
@@ -26,6 +28,15 @@
 #  define DECBASE "0123456789"
 # endif
 
+//get_next_line
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+# ifndef MAX_FD
+#  define MAX_FD 4096
+# endif
+
+# include <stddef.h>
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>

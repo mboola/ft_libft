@@ -67,7 +67,7 @@ char	*get_next_line(int fd)
 	if (ft_strchr(str[fd], '\n') == NULL)
 		return (ft_strdup_free(&str[fd], 0, NULL));
 	next_newline = ft_strlenchr(str[fd], '\n');
-	tmp = ft_substr(&str[fd], 0, next_newline + 1);
+	tmp = ft_substrref(&str[fd], 0, next_newline + 1);
 	str[fd] = ft_strdup_free(&str[fd], next_newline + 1, &tmp);
 	return (tmp);
 }
