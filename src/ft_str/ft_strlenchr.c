@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strlenchr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpovill- <mpovill-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 10:52:15 by mpovill-          #+#    #+#             */
-/*   Updated: 2023/09/13 10:52:31 by mpovill-         ###   ########.fr       */
+/*   Created: 2023/09/13 10:44:40 by mpovill-          #+#    #+#             */
+/*   Updated: 2023/09/13 10:45:02 by mpovill-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+size_t	ft_strlenchr(char *str, char c)
 {
 	size_t	count;
 
-	if (s == NULL)
-		return (NULL);
+	if (str == NULL)
+		return (0);
 	count = 0;
-	while (*(s + count) != (char)c && *(s + count) != '\0')
-		count++;
-	if (*(s + count) == (char)c)
-		return ((char *)(s + count));
-	return (NULL);
+	if (c == '\0')
+	{
+		while (*(str + count) != '\0')
+			count++;
+	}
+	else
+	{
+		while (*(str + count) != '\0' && *(str + count) != c)
+			count++;
+	}
+	if (*(str + count) == c)
+		return (count);
+	return (0);
 }

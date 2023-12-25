@@ -66,6 +66,9 @@ void	ft_dolstdelone(t_dlist *lst, void (*del)(void *));
 t_dlist	*ft_dolstlast(t_dlist *lst);
 t_dlist	*ft_dolstnew(void *content);
 
+//ft_get_next_line
+char	*get_next_line(int fd);
+
 //ft_lst
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
@@ -101,17 +104,21 @@ int		ft_putunsnbr_err(int fd, unsigned int nbr, char *base, int *err);
 //ft_str
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strdup_free(char **str, size_t newline, char **tmp);
 char	*ft_strdup(const char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_free(char **s1, char **s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
+size_t	ft_strlenchr(char *str, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substrref(char **s, unsigned int start, size_t len);
 
 #endif

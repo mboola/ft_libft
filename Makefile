@@ -27,6 +27,9 @@ DOLST_DIR		=	${SRC}/ft_dolst
 DOLST_FILE		=	ft_dolstadd_back.c ft_dolstadd_front.c ft_dolstclear.c ft_dolstdelone.c \
 					ft_dolstextract_back.c ft_dolstextract_front.c ft_dolstlast.c ft_dolstnew.c
 
+GET_NEXT_LINE_DIR	=	${SRC}/ft_get_next_line
+GET_NEXT_LINE_FILE	=	ft_get_next_line.c
+
 LST_DIR			=	${SRC}/ft_lst
 LST_FILE		=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
 					ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
@@ -42,9 +45,9 @@ PUT_FD_FILE		=	ft_putchar_err.c ft_putendl_err.c ft_putnbr_err.c ft_putnbr_long_
 					ft_putptr_err.c ft_putstr_err.c ft_putunsnbr_err.c
 
 STR_DIR			=	${SRC}/ft_str
-STR_FILE		=	ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
-					ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
-					ft_strtrim.c ft_substr.c     
+STR_FILE		=	ft_split.c ft_strchr.c ft_strdup_free.c ft_strdup.c ft_striteri.c ft_strjoin.c \
+					ft_strjoin_free.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strlenchr.c ft_strmapi.c \
+					ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_substrref.c
 
 SRC_FILES		=	${addprefix $(CHECKERS_DIR)/,$(CHECKERS_FILE)} \
 					$(addprefix $(CONVERTERS_DIR)/,$(CONVERTERS_FILE)) \
